@@ -69,6 +69,9 @@ class ListsSpec extends flatspec.AnyFlatSpec with should.Matchers {
     val list = LazyList.continually(1) take 100000 to(List)
     P04.length(list) shouldBe 100000
   }
+  it should "get factorial" in {
+    P04.factorial(5) shouldBe BigInt(120)
+  }
 
   behavior of "P05.reverse"
 

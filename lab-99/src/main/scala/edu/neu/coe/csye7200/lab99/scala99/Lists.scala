@@ -58,28 +58,43 @@ object P03 {
 object P04 {
 
   def length[X](xs: List[X]): Int = {
-    def trLength[X](xs: List[X], length: Int): Int = {
-      xs match {
-        case Nil => length
-        case _ :: t => trLength(t, length + 1)
-      }
+    def inner[X](xs: List[X], length: Int): Int = xs match {
+      case Nil => length
+      case _ :: t => inner(t, length + 1)
     }
-    trLength(xs, 0)
+    inner(xs, 0)
   } // TO BE IMPLEMENTED
+
+  def factorial(n: Int): BigInt = {
+    def inner(r: BigInt, x: Int): BigInt = x match {
+      case 1 => r
+      case _ => inner(x * r, x - 1)
+    }
+    inner(1, n)
+  }
 }
 
 object P05 {
 
   def reverse[X](xs: List[X]): List[X] = {
     // TO BE IMPLEMENTED
-    ???
+    @tailrec
+    def inner(r: List[X], work: List[X]): List[X] = work match {
+      case Nil => r
+      case h :: t => inner(h +: r, t)
+    }
+    inner(Nil, xs)
   }
 }
 
 object P06 {
 
   //@tailrec
-  def isPalindrome[X](xs: List[X]): Boolean = ??? // TO BE IMPLEMENTED
+  def isPalindrome[X](xs: List[X]): Boolean = xs match {
+    case Nil => true
+    case _ :: Nil => true
+    case h :: t => h == t.last && isPalindrome(t.init)
+  } // TO BE IMPLEMENTED
 }
 
 object P07 {
